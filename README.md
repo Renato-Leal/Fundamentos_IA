@@ -3,7 +3,7 @@ Proyecto_1
 
 Agregué dos funciones en el board que hace que se adapten a los movimientos del juego.
 En el tictactoe, debemos hacer varias cosas para adaptarlo a OTHELLO:
-Definir todo en donde se trabaja
+Se trabaja en base al tablero
 
 TODO ESTO SE EDITA DEL ARCHIVO tictactoe.py
 
@@ -11,4 +11,4 @@ TODO ESTO SE EDITA DEL ARCHIVO tictactoe.py
 - Un método que valide si una jugada es legal (busca encierros en las 8 direcciones).
 - Un método que ejecute la jugada y voltee las fichas correspondientes.
 - Un método que determine si hay jugadas legales disponibles (para el paso obligatorio).
-- Conteo de fichas por jugador (para determinar el ganador).
+- Conteo de fichas por jugador (para determinar el ganador). *Ya está listo*
