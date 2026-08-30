@@ -11,7 +11,7 @@ class OthelloBoard(Board):
     __player1: str  # ícono del jugador 1
     __player2: str  # ícono del jugador 2
 
-    def __init__(self, size, player1: str = "O", player2: str = "X"):
+    def __init__(self, size, player1: str = "A", player2: str = "B"):
         if not isinstance(size, int):
             raise ValueError("El tamaño debe ser un número entero.")
         if size % 2 != 0:
@@ -144,18 +144,18 @@ class OthelloBoard(Board):
     def contar_fichas(self):
         """Cuenta cuántas fichas hay en el tablero de cada color"""
         n = self.size
-        negras = sum(
+        B_ficha = sum(
             1 for i in range(1, n + 1) for j in range(1, n + 1)
             if self[i, j] == self.__player1
         )
-        blancas = sum(
+        A_ficha = sum(
             1 for i in range(1, n + 1) for j in range(1, n + 1)
             if self[i, j] == self.__player2
         )
-        marcador = f"Negras :{negras} || Blancas :{blancas}"
-        if negras > blancas:
+        marcador = f"Fichas B :{B_ficha} || Fichas A :{A_ficha}"
+        if B_ficha > A_ficha:
             return f"{marcador} || Gana el jugador 1"
-        elif blancas > negras:
+        elif A_ficha > B_ficha:
             return f"{marcador} || Gana el jugador 2"
         else:
             return f"{marcador} || Empate"

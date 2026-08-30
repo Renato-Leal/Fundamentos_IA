@@ -30,13 +30,10 @@ class Board:
 
     def __str__(self) -> str:
         """Función que es llamada cuando se hace str(self)"""
-        # Cantidad de caracteres para la columna con número de fila
         offset = math.ceil(math.log10(self.__size))
-        # Primera línea
         board = " "*offset + " "
-        board += " ".join(chr(ord('A') + i) for i in range(self.__size)) + "\n"
+        board += " ".join(str(i) for i in range(1, self.__size + 1)) + "\n"
         for i, line in enumerate(self.__places, 1):
-            # Falta arreglar el ancho del primer número
             board += f"{i} " + " ".join(line) + '\n'
         return board
 

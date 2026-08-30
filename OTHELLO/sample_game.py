@@ -9,11 +9,11 @@ while board is None:
     entrada = input(f"Ingrese el tamaño del tablero (par, mínimo {OthelloBoard.TAM_MIN}): ")
     try:
         n = int(entrada)
-        board = OthelloBoard(n, player1="O", player2="X")
+        board = OthelloBoard(n, player1="A", player2="B")
     except ValueError as e:
         print(f"Tamaño inválido: {e}")
  
-turn = 1  # 1 = jugador 1 (O), 2 = jugador 2 (X)
+turn = 1  # 1 = jugador 1 (A), 2 = jugador 2 (B)
 pases_seguidos = 0
  
 print(board)
