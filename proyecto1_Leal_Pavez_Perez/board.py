@@ -1,13 +1,10 @@
-import math
-
 class Board:
-    __places: list[list[str]]  # Tablero en sí
-    __size: int  # Tamaño del tablero
+    __places: list[list[str]]
+    __size: int
 
-    EMPTY_SPACE = "."  # Constante de clase que marca los espacios vacíos
+    EMPTY_SPACE = "."
 
-    # Las 8 direcciones posibles a partir de una casilla: (delta_fila, delta_columna)
-    # Sirven para recorrer el tablero en línea recta (arriba, abajo, izq, der y diagonales)
+    # Las 8 direcciones para recorrer el tablero: (delta_fila, delta_columna)
     DIRECTIONS = [
         (-1, -1), (-1, 0), (-1, 1),
         (0, -1),           (0, 1),
@@ -16,7 +13,6 @@ class Board:
 
     def __init__(self, n: int = 3):
         """Crea un tablero"""
-        # Define la lista para almacenar las posiciones
         self.__places = [
             [Board.EMPTY_SPACE] * n for _ in range(n)
         ]
@@ -24,27 +20,31 @@ class Board:
 
     @property
     def size(self) -> int:
-        """Tamaño del tablero (n), expuesto públicamente para las clases hijas"""
+        """Tamaño del tablero (n)"""
         return self.__size
 
     @staticmethod
     def __column_label(index: int) -> str:
-        letter = chr(ord('A') + index % 26)   # letra dentro del ciclo actual (0-25)
-        cycle = index // 26                    # cuántas "vueltas" completas al alfabeto
+        """Traduce un índice de columna (0-based) a su etiqueta
+
+        Para las primeras 26 columnas usa una sola letra (A, B, ..., Z).
+        Desde la columna 27 en adelante, reinicia el alfabeto agregando
+        un número que indica cuántas "vueltas" lleva: A1, B1, ..., Z1,
+        A2, B2, ...
+        """
+        letter = chr(ord('A') + index % 26)
+        cycle = index // 26
         return letter if cycle == 0 else f"{letter}{cycle}"
 
     def column_label(self, column: int) -> str:
         """Traduce un número de columna (1-indexado) a su letra"""
         return self.__column_label(column - 1)
-    
+
     @staticmethod
     def column_number(label: str) -> int:
         """Traduce una etiqueta de columna (A, B, ..., Z, A1, B1, ...)
         a su número de columna (1-indexado, el mismo formato que usa
         self[r, c])
- 
-        Es el método inverso de __column_label. Público, para que
-        sample_game.py pueda usarlo al leer la jugada del usuario.
         """
         label = label.strip().upper()
         if not label or not label[0].isalpha():
@@ -62,7 +62,7 @@ class Board:
         col_labels = [self.__column_label(i) for i in range(self.__size)]
         row_labels = [str(i) for i in range(1, self.__size + 1)]
         width = max(len(label) for label in col_labels + row_labels)
- 
+
         header = " " * width + " "
         header += " ".join(f"{label:>{width}}" for label in col_labels)
         board = header + "\n"
@@ -80,77 +80,47 @@ class Board:
         return self.__size
 
     def __check_valid_range(self, r: int) -> bool:
-        """Valida que el valor esté dentro del rango del tablero
-
-        Esto considera que las posiciones van de 1 a n
-        """
-        # Nombre con dos guiones bajos al inicio se interpreta como privada
+        """Valida que el valor esté dentro del rango del tablero (1 a n)"""
         if 1 > r or r > self.__size:
             return False
         return True
 
     def in_bounds(self, r: int, c: int) -> bool:
-        """Valida que la coordenada (r, c) esté dentro del tablero
-
-        A diferencia de __check_valid_range, revisa fila y columna juntas
-        de una vez, y es público para que las clases hijas (u otro código)
-        puedan usarlo al recorrer el tablero, por ejemplo con Board.DIRECTIONS
-        """
+        """Valida que la coordenada (r, c) esté dentro del tablero"""
         return self.__check_valid_range(r) and self.__check_valid_range(c)
 
     def __getitem__(self, subscript: int | tuple):
         """Implementa self[subscript]
 
-        En este caso, `subscript` puede ser un entero (fila) o una tupla
-        (coordenadas).
-
-        Levanta excepciones, si no se usa bien.
+        `subscript` puede ser un entero (fila) o una tupla (coordenadas)
         """
         if isinstance(subscript, tuple):
-            # Si es una tupla
-            # Si son más o menos que filas y columnas
             if len(subscript) != 2:
-                raise ValueError("Coordenadas con más de 2 dimensiones")
-            # Si la fila está fuera de rangoo
+                raise ValueError("Coordinadas con muchas dimensiones")
             if not self.__check_valid_range(subscript[0]):
-                raise LookupError(f"Fila fuera de rango: {subscript[0]}")
-            # Si la columna está fuera de rango
+                raise LookupError(f"Fila fuera del rango: {subscript[0]}")
             if not self.__check_valid_range(subscript[1]):
-                raise LookupError(f"Columna fuera de rango: {subscript[1]}")
+                raise LookupError(f"Columna fuera del rango: {subscript[1]}")
             return self.__places[subscript[0] - 1][subscript[1] - 1]
         elif isinstance(subscript, int):
-            # Si es un entero
             if not self.__check_valid_range(subscript):
-                raise LookupError(f"Fila fuera de rango: {subscript}")
+                raise LookupError(f"Fila fuera del rango: {subscript}")
             return self.__places[subscript - 1]
         else:
-            # Si el índice no es del tipo correcto
-            raise TypeError("Dato inválido, ingrese dato en coordenada")
+            raise TypeError("Subscript debe ser un entero o coordenadas.")
 
     def __setitem__(self, key: tuple, value: str) -> None:
-        """Implementa self[key] = value
-
-        El "índice" `key` tiene que ser un par de coordenadas
-        """
+        """Implementa self[key] = value"""
         if not isinstance(key, tuple):
-            raise TypeError(f"Subscript debe ser coordenadas (tuple), not {type(key)}")
+            raise TypeError(f"Coordinadas deben ser dimensiones (tuple), not {type(key)}")
         if len(key) != 2:
-            raise ValueError("Coordenadas con más de 2 dimensiones")
-        # Si la fila está fuera de rangoo
+            raise ValueError("Coordinadas con muchas dimensioness")
         if not self.__check_valid_range(key[0]):
-            raise LookupError(f"Fila fuera de rango: {key[0]}")
-        # Si la columna está fuera de rango
+            raise LookupError(f"Fila fuera del rango: {key[0]}")
         if not self.__check_valid_range(key[1]):
-            raise LookupError(f"Columna fuera de rango: {key[1]}")
+            raise LookupError(f"Columna fuera del rango: {key[1]}")
         self.__places[key[0] - 1][key[1] - 1] = value
 
     def valid_move(self, r: int, c: int):
-        """Valida que sea un movimiento válido, es decir, a una casilla libre
-
-        Este método debería ser sobrecargado por un tablero hijo que
-        permite movimientos válidos con otras reglas
-        """
+        """Valida que sea un movimiento válido, es decir, a una casilla libre"""
         return self[r, c] == Board.EMPTY_SPACE
-
-
-   
