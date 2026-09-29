@@ -15,4 +15,5 @@ TODO ESTO SE EDITA DEL ARCHIVO tictactoe.py
 NOTA FINAL: 6.8
 
 Proyecto_2
+
 Chatbot que de las especificaciones técnicas de juegos de mesa - Recomendación.
