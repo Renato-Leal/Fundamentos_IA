@@ -11,9 +11,14 @@ Ejemplos de información:
 -Tipo de juego (Rol, casual u otro) - Categoría
 -Requiere tablero
 -Si se juega con tiempo cronometrado y cuanto
--A partir de que edad se puede jugar
+-Edad mínima
 -Tiene expansión
 -Idioma del juego: Es o En
 
 Reglas:
+
+-si jugadores_usuario < juego.min_jugadores O jugadores_usuario > juego.max_jugadores 
+
+-si edad_usuario_menor < juego.edad_minima
+
 -
