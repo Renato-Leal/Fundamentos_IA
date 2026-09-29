@@ -12,6 +12,7 @@ TODO ESTO SE EDITA DEL ARCHIVO tictactoe.py
 - Un método que ejecute la jugada y voltee las fichas correspondientes. *Ya está listo*
 - Un método que determine si hay jugadas legales disponibles (para el paso obligatorio). *Ya está listo*
 - Conteo de fichas por jugador (para determinar el ganador). *Ya está listo*
+  
 NOTA FINAL: 6.8
 
 Proyecto_2
