@@ -18,3 +18,5 @@ NOTA FINAL: 6.8
 Proyecto_2
 
 Chatbot que de las especificaciones técnicas de juegos de mesa - Recomendación.
+
+Primera entrega en formato PL (de prolog)
