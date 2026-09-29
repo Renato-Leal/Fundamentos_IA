@@ -1,0 +1,19 @@
+Para comprobar si funciona: 
+-10 a 20 hechos
+Área de conocimiento
+
+Idea:
+Chatbot que de las especificaciones técnicas de juegos de mesa - Recomendación(Tmb se verá en otro ramo).
+
+Ejemplos de información:
+-Número de jugadores
+-Nivel de dificultad
+-Tipo de juego (Rol, casual u otro) - Categoría
+-Requiere tablero
+-Si se juega con tiempo cronometrado y cuanto
+-A partir de que edad se puede jugar
+-Tiene expansión
+-Idioma del juego: Es o En
+
+Reglas:
+-
