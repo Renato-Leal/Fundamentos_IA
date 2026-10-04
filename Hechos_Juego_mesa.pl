@@ -11,6 +11,10 @@ juego(carcassonne, 'Carcassonne').
 juego(dobble,      'Dobble').
 juego(ticket,      'Ticket to Ride').
 juego(dnd,         'Dungeons & Dragons (caja de inicio)').
+juego(black_stories, 'Black Stories').
+juego(dixit, 'Dixit').
+juego(monopoly, 'Monopoly').
+juego(scrabble, 'Scrabble').
 
 % ---------- NÚMERO DE JUGADORES ----------
 % min_jugadores(Juego, Minimo)
@@ -21,6 +25,10 @@ min_jugadores(carcassonne, 2).
 min_jugadores(dobble, 2).
 min_jugadores(ticket, 2).
 min_jugadores(dnd, 2).
+min_jugadores(black_stories, 2).
+min_jugadores(dixit, 3).
+min_jugadores(monopoly, 2).
+min_jugadores(scrabble, 2).
 
 % max_jugadores(Juego, Maximo)
 max_jugadores(catan, 4).          % con ampliación 5-6 llega a 6
@@ -30,6 +38,10 @@ max_jugadores(carcassonne, 5).
 max_jugadores(dobble, 8).
 max_jugadores(ticket, 5).
 max_jugadores(dnd, 7).
+max_jugadores(black_stories, 30).
+max_jugadores(dixit, 8).
+max_jugadores(monopoly, 8).
+max_jugadores(scrabble, 4).
 
 % ---------- NIVEL DE DIFICULTAD (facil, medio, dificil) ----------
 dificultad(catan, medio).
@@ -39,6 +51,10 @@ dificultad(carcassonne, medio).
 dificultad(dobble, facil).
 dificultad(ticket, medio).
 dificultad(dnd, dificil).
+dificultad(dark_stories, medio).
+dificultad(dixit, facil).
+dificultad(monopoly, medio).
+dificultad(scrabble, medio).
 
 % ---------- CATEGORÍA (estrategia, casual, rol, cartas, trivia...) ----------
 categoria(catan, estrategia).
@@ -50,6 +66,11 @@ categoria(dobble, casual).
 categoria(dobble, reflejos).
 categoria(ticket, estrategia).
 categoria(dnd, rol).
+categoria(dark_stories, casual).
+categoria(dark_stories, cartas).
+categoria(dixit, casual).
+categoria(monopoly, estrategia).
+categoria(scrabble, estrategia).
 
 % ---------- REQUIERE TABLERO (si / no) ----------
 requiere_tablero(catan, si).
@@ -59,6 +80,10 @@ requiere_tablero(carcassonne, no).  % se arma con fichas, sin tablero fijo
 requiere_tablero(dobble, no).
 requiere_tablero(ticket, si).
 requiere_tablero(dnd, no).        % mapa opcional
+requiere_tablero(dark_stories, no).
+requiere_tablero(dixit, si).
+requiere_tablero(monopoly, si). 
+requiere_tablero(scrabble, si).
 
 % ---------- TIEMPO CRONOMETRADO ----------
 % tiempo_cronometrado(Juego, no)  o  tiempo_cronometrado(Juego, Minutos)
@@ -69,6 +94,10 @@ tiempo_cronometrado(carcassonne, no).
 tiempo_cronometrado(dobble, no).
 tiempo_cronometrado(ticket, no).
 tiempo_cronometrado(dnd, no).
+tiempo_cronometrado(dark_stories, no).
+tiempo_cronometrado(dixit, no).
+tiempo_cronometrado(monopoly, no).
+tiempo_cronometrado(scrabble, no).
 
 % Duración aproximada de una partida, en minutos
 duracion_minutos(catan, 75).
@@ -78,6 +107,10 @@ duracion_minutos(carcassonne, 45).
 duracion_minutos(dobble, 15).
 duracion_minutos(ticket, 60).
 duracion_minutos(dnd, 180).
+duracion_minutos(dark_stories, 20).
+duracion_minutos(dixit, 30).
+duracion_minutos(monopoly, 100).
+duracion_minutos(scrabble, 90).
 
 % ---------- EDAD MÍNIMA (años) ----------
 edad_minima(catan, 10).
@@ -87,6 +120,10 @@ edad_minima(carcassonne, 7).
 edad_minima(dobble, 6).
 edad_minima(ticket, 8).
 edad_minima(dnd, 12).
+edad_minima(dark_stories, 12).
+edad_minima(dixit, 8).
+edad_minima(monopoly, 8).
+edad_minima(scrabble, 10).
 
 % ---------- TIENE EXPANSIÓN (si / no) ----------
 tiene_expansion(catan, si).       % Navegantes, Ciudades y Caballeros, Ampliación 5-6
@@ -96,6 +133,10 @@ tiene_expansion(carcassonne, si).
 tiene_expansion(dobble, no).
 tiene_expansion(ticket, si).
 tiene_expansion(dnd, si).
+tiene_expansion(dark_stories, no).
+tiene_expansion(dixit, si).
+tiene_expansion(monopoly, no).
+tiene_expansion(scrabble, no).
 
 % ---------- IDIOMA (es / en); un juego puede tener varios ----------
 idioma(catan, es).
@@ -111,6 +152,14 @@ idioma(ticket, es).
 idioma(ticket, en).
 idioma(dnd, es).
 idioma(dnd, en).
+idioma(dark_stories, es).
+idioma(dark_stories, en).
+idioma(dixit, es).
+idioma(dixit, en).
+idioma(monopoly, es).
+idioma(monopoly, en).
+idioma(scrabble, en).
+idioma(scrabble, es).
 
 % =====================================================
 % REGLAS
